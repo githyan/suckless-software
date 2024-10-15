@@ -1,5 +1,4 @@
 ### DOTFILES ENVIRONMENTS SIMPLE RICING
-<br>
 #### This is my dwm's ricing simple setup you can build your own setup. please read [the patches documentation](https://dwm.suckless.org/patches)
 #### Includes patch
 - vanitygaps has many features to attach windows clients arounds. 
