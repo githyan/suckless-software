@@ -9,5 +9,5 @@
 - moveresize is moving and resizing the windows client while floating around.
 - barpadding sets vertical and horizontal padding to allow that bar's having an gaps.
 - colorbar is multiplying a colorbar.
-- status2d this patch makes the bar more fancy. Take a look to [Check the repo](https://github.com/sipi/dwm-status2d) to apply it up at your barlines.
+- status2d this patch makes the bar more fancy. Take a look to [Check the repo](https://github.com/sipi/dwm-status2d) applies it up at your barlines.
 - win31themes and gruvbox is my favorite themes.
