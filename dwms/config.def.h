@@ -1,6 +1,9 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
+static const char *fonts[] = {"Fixedsys Excelsior:size=13:antialias=true:autohint=false"};
+static const char dmenufont[] = "Fixedsys Excelsior:size=13:antialias=true:autohint=false";
+
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int gappih    = 20;       /* horiz inner gap between windows */
@@ -16,20 +19,10 @@ static const int vertpad            = 8;
 static const int sidepad            = 5;
 #define ICONSIZE 20   /* icon size */
 #define ICONSPACING 5 /* space between icon and title */
-#include "themes/gruvbox.h"
+#include "/home/archaen/.cache/wal/colors-wal-dwm.h"
 
 static unsigned int baralpha        = 0xb0;
 static unsigned int borderalpha     = OPAQUE;
-static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
-	[SchemeStatus]  = { col_gray3, col_gray1,  col_gray3  }, // Statusbar right {text,background,not used but cannot be empty}
-	[SchemeTagSel]  = { col_gray4, col_cyan,  col_gray2  }, // Tagbar left selected {text,background,not used but cannot be empty}
-	[SchemeTagsNorm]  = { col_gray3, col_gray1,  col_cyan  }, // Tagbar left unselected {text,background,not used but cannot be empty}
-	[SchemeInfoSel]  = { col_gray4, col_cyan,  col_gray1  }, // infobar middle  selected {text,background,not used but cannot be empty}
-	[SchemeInfoNorm]  = { col_gray3, col_gray1,  col_gray4 }, // infobar middle  unselected {text,background,not used but cannot be empty}
-};
 
 /* tagging */
 static const char *tags[] = {"一", "二", "三","四","五","六","七","八","九"};
