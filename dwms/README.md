@@ -13,3 +13,4 @@
 - win31themes and gruvbox is my favorite themes.
 - preserveonstart
 - restartsig
+- anybar patches allows us to get else bar<br> If you want to go please read [this documentation](https://github.com/mihirlad55/polybar-dwm-module) you would be guiding how to applies it into your setup  
