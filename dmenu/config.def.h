@@ -8,16 +8,10 @@ static int min_width = 500;                    /* minimum width when centered */
 static const float menu_height_ratio = 4.0f;  /* This is the ratio used in the original calculation */
 /* -fn option overrides fonts[0]; default X11 font or font set */
 #include "themes/gruvbox.h"
-
+#include "/home/archaen/.cache/wal/colors-wal-dmenu.h"
 static const char *prompt      = NULL;      /* -p  option; prompt to the left of input field */
 static const char *symbol_1 = "<";
 static const char *symbol_2 = ">";
-static const char *colors[SchemeLast][2] = {
-  [SchemeNorm] = {col_gray3, col_gray1},
-  [SchemeSel] = { col_gray4, col_cyan},
-  [SchemeOut] = { col_gray2, col_gray1 },
-};
-
 static const unsigned int alphas[SchemeLast][2] = {
 	[SchemeNorm] = { OPAQUE, alpha },
 	[SchemeSel] = { OPAQUE, alpha },
