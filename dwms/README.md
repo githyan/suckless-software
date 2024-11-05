@@ -13,4 +13,3 @@
 - win31themes and gruvbox is my favorite themes.
 - preserveonstart
 - restartsig
-- awsomebar with hover [check this link] (https://dwm.suckless.org/patches/awesomebar/)
