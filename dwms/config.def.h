@@ -1,8 +1,8 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char *fonts[] = {"Fixedsys Excelsior:size=13:antialias=true:autohint=false"};
-static const char dmenufont[] = "Fixedsys Excelsior:size=13:antialias=true:autohint=false";
+static const char *fonts[] = { "FiraCode Nerd Font:style=Medium:size=10" };
+static const char dmenufont[] = { "FiraCode Nerd Font:style=Medium:size10"};
 
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
