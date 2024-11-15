@@ -20,8 +20,7 @@ static const int vertpad            = 8;
 static const int sidepad            = 5;
 #define ICONSIZE 20   /* icon size */
 #define ICONSPACING 5 /* space between icon and title */
-#include "themes/gruvbox.h"
-#include "/home/archaen/.cache/wal/colors-wal-dwm.h"
+#include "themes/colors-wal-dwm.h"
 static unsigned int baralpha        = 0xb0;
 static unsigned int borderalpha     = OPAQUE;
 /* tagging */
@@ -84,7 +83,7 @@ static const char *screenshot[] = {"scrot", "/home/archaen/Pictures/screenshots/
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 // static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *dmenucmd[] = { "dmenu_run", "-c", "-l", "20", NULL};
+static const char *dmenucmd[] = { "dmenu_run", "-c", "-l", "15", NULL};
 static const char *termcmd[]  = { "st", NULL };
 static const char *layoutmenu_cmd= "layoutmenu.sh";
 
