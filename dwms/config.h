@@ -20,21 +20,9 @@ static const int vertpad            = 8;
 static const int sidepad            = 5;
 #define ICONSIZE 20   /* icon size */
 #define ICONSPACING 5 /* space between icon and title */
-#include "themes/gruvbox.h"
-#include "/home/archaen/.cache/wal/colors-wal-dwm.h"
+#include "themes/colors-wal-dwm.h"
 static unsigned int baralpha        = 0xb0;
 static unsigned int borderalpha     = OPAQUE;
-// static const char *colors[][3]      = {
-// 	/*               fg         bg         border   */
-// 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-// 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
-// 	[SchemeStatus]  = { col_gray3, col_gray1,  col_gray3  }, // Statusbar right {text,background,not used but cannot be empty}
-// 	[SchemeTagSel]  = { col_gray4, col_cyan,  col_gray2  }, // Tagbar left selected {text,background,not used but cannot be empty}
-// 	[SchemeTagsNorm]  = { col_gray3, col_gray1,  col_cyan  }, // Tagbar left unselected {text,background,not used but cannot be empty}
-// 	[SchemeInfoSel]  = { col_gray4, col_cyan,  col_gray1  }, // infobar middle  selected {text,background,not used but cannot be empty}
-// 	[SchemeInfoNorm]  = { col_gray3, col_gray1,  col_gray4 }, // infobar middle  unselected {text,background,not used but cannot be empty}
-// };
-
 /* tagging */
 static const char *tags[] = {"一", "二", "三","四","五","六","七","八","九"};
 static const Rule rules[] = {
@@ -44,7 +32,7 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	// { "Firefox",  NULL,       NULL,       1 << 8,       1,           -1 },
 };
 
 /* layout(s) */
@@ -95,7 +83,7 @@ static const char *screenshot[] = {"scrot", "/home/archaen/Pictures/screenshots/
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 // static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *dmenucmd[] = { "dmenu_run", "-c", "-l", "20", NULL};
+static const char *dmenucmd[] = { "dmenu_run", "-c", "-l", "15", NULL};
 static const char *termcmd[]  = { "st", NULL };
 static const char *layoutmenu_cmd= "layoutmenu.sh";
 
