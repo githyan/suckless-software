@@ -17,8 +17,6 @@ static const int horizpadbar        = 2;
 static const int vertpadbar         = 1;
 static const int vertpad            = 8;
 static const int sidepad            = 5;
-#define ICONSIZE 20   /* icon size */
-#define ICONSPACING 5 /* space between icon and title */
 #include "/home/archaen/.cache/wal/colors-wal-dwm.h"
 static char termcol0[] = "#000000"; /* black   */
 static char termcol1[] = "#ff0000"; /* red     */
@@ -119,7 +117,7 @@ static const char *screenshot[] = {"scrot", "/home/archaen/Pictures/screenshots/
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 // static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", normbgcolor, "-sb", selbordercolor, "-sf", selfgcolor, "-c", "-l", "20", NULL};
+static const char *dmenucmd[] = { "dmenu_run", "-c", "-l", "20", NULL};
 static const char *termcmd[]  = { "st", NULL };
 static const char *kittycmd[] = { "kitty", NULL };
 static const char *layoutmenu_cmd= "layoutmenu.sh";
@@ -219,12 +217,11 @@ static const Key keys[] = {
 };
 
 /* button definitions */
-/* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
+/* click can be ClkTagBar, ClkLtSymbol, ClkStatusText,  ClkClientWin, or ClkRootWin */
 static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        layoutmenu,     {0} },
-	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
