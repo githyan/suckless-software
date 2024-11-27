@@ -97,62 +97,7 @@ unsigned int tabspaces = 8;
 float alpha = 0.85; 
 
 /* Terminal colors (16 first used in escape sequence) */
-static const char *colorname[] = {
-	[0] = "#282828",	 /* hard constant: #1d2021 / soft contrast: #32302f */
-	[1] = "#cc241d",	 /* red */
-	[2] = "#98971a",	 /* green */
-	[3] = "#d79921",	 /* yellow */
-	[4] = "#458588",	 /* blue */
-	[5] = "#b16286",	 /* magenta */
-	[6] = "#689d6a",	 /* cyan */
-	[7] = "#a89984",	 /* white */
-	[8] = "#928374",	 /* black */
-	[9] = "#fb4934",	 /* red */
-	[10] = "#b8bb26",	 /* green */
-	[11] = "#fabd2f",	 /* yellow */
-	[12] = "#83a598",	 /* blue */
-	[13] = "#d3869b",	 /* magenta */
-	[14] = "#8ec076",	 /* cyan */
-	[15] = "#ebdbb2", 	 /* white */ 
-/*  "#ff5733",
-    "#ffda33",
-    "#33ff57",
-    "#338aff",
-    "#ff33f5",
-    "#33e6ff",
-    "#ff5733",
-    "#ff8533",
-    "#ffcf33",
-    "#33ff6b",
-    "#33a6ff",
-    "#ff33b5",
-    "#33f7ff",
-    "#ff5733",
-    "#ffa833",
-    "#ffd933",
-
-    [255] = 0,
-
-    "#ffda33",
-    "#ff5733",
-    "#000000",
-    "#ffffff",
-*/
-
-};
-/*
- * Default colors (colorname index)
- * foreground, background, cursor, reverse cursor
- */
-//unsigned int defaultfg = 259;
-//unsigned int defaultbg = 258;
-//unsigned int defaultcs = 256;
-unsigned int defaultfg = 15;
-unsigned int defaultbg = 0;
-unsigned int defaultcs = 15;
-
-static unsigned int defaultrcs = 257;
-
+#include "/home/archaen/.cache/wal/colors-wal-st.h"
 /*
  * Default shape of cursor
  * 2: Block ("█")
@@ -197,6 +142,8 @@ static uint forcemousemod = ShiftMask;
  */
 static MouseShortcut mshortcuts[] = {
 	/* mask                 button   function        argument       release */
+  // { ShiftMask,            Button4, kscrollup,      {.i = 1} },
+  // { ShiftMask,            Button5, kscrolldown,    {.i = 1} },
 	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
 	{ ShiftMask,            Button4, ttysend,        {.s = "\033[5;2~"} },
 	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
@@ -224,6 +171,8 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
+  { ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
+  { ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
 	{ ACMPL_MOD,            XK_slash,       autocomplete,   { .i = ACMPL_WORD        } },
 	{ ACMPL_MOD,            XK_period,      autocomplete,   { .i = ACMPL_FUZZY_WORD  } },
 	{ ACMPL_MOD,            XK_comma,       autocomplete,   { .i = ACMPL_FUZZY       } },
