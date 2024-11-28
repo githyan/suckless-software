@@ -13,3 +13,5 @@
 - win31themes and gruvbox is my favorite themes.
 - preserveonstart
 - restartsig
+- xrdb_status2d
+- steam
