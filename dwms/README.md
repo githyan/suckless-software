@@ -15,3 +15,4 @@
 - restartsig
 - xrdb_status2d
 - steam
+- exitmenu
