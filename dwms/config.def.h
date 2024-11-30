@@ -80,6 +80,7 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 #include <X11/XF86keysym.h>
 #include "vanitygaps.c"
 #include "gaplessgrid.c"
+#include "exitdwm.c"
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
@@ -214,7 +215,8 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-	{ MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {1} }, 
+	{ MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {1} },
+  { MODKEY|ShiftMask,             XK_e,      exitdwm,        {0}  },
 };
 
 /* button definitions */
