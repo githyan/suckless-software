@@ -20,7 +20,6 @@ static void grid(Monitor *m);
 static void nrowgrid(Monitor *m);
 static void spiral(Monitor *m);
 static void tile(Monitor *m);
-static void tilewide(Monitor *m);
 /* Internals */
 static void getgaps(Monitor *m, int *oh, int *ov, int *ih, int *iv, unsigned int *nc);
 static void getfacts(Monitor *m, int msize, int ssize, float *mf, float *sf, int *mr, int *sr);
@@ -571,6 +570,59 @@ spiral(Monitor *m)
 }
 
 /*
+ * Gappless grid layout + gaps (ironically)
+ * https://dwm.suckless.org/patches/gaplessgrid/
+ */
+void
+gaplessgrid(Monitor *m)
+{
+	unsigned int i, n;
+	int x, y, cols, rows, ch, cw, cn, rn, rrest, crest; // counters
+	int oh, ov, ih, iv;
+	Client *c;
+
+	getgaps(m, &oh, &ov, &ih, &iv, &n);
+	if (n == 0)
+		return;
+
+	/* grid dimensions */
+	for (cols = 0; cols <= n/2; cols++)
+		if (cols*cols >= n)
+			break;
+	if (n == 5) /* set layout against the general calculation: not 1:2:2, but 2:3 */
+		cols = 2;
+	rows = n/cols;
+	cn = rn = 0; // reset column no, row no, client count
+
+	ch = (m->wh - 2*oh - ih * (rows - 1)) / rows;
+	cw = (m->ww - 2*ov - iv * (cols - 1)) / cols;
+	rrest = (m->wh - 2*oh - ih * (rows - 1)) - ch * rows;
+	crest = (m->ww - 2*ov - iv * (cols - 1)) - cw * cols;
+	x = m->wx + ov;
+	y = m->wy + oh;
+
+	for (i = 0, c = nexttiled(m->clients); c; i++, c = nexttiled(c->next)) {
+		if (i/rows + 1 > cols - n%cols) {
+			rows = n/cols + 1;
+			ch = (m->wh - 2*oh - ih * (rows - 1)) / rows;
+			rrest = (m->wh - 2*oh - ih * (rows - 1)) - ch * rows;
+		}
+		resize(c,
+			x,
+			y + rn*(ch + ih) + MIN(rn, rrest),
+			cw + (cn < crest ? 1 : 0) - 2*c->bw,
+			ch + (rn < rrest ? 1 : 0) - 2*c->bw,
+			0);
+		rn++;
+		if (rn >= rows) {
+			rn = 0;
+			x += cw + ih + (cn < crest ? 1 : 0);
+			cn++;
+		}
+	}
+}
+
+/*
  * Gridmode layout + gaps
  * https://dwm.suckless.org/patches/gridmode/
  */
@@ -766,32 +818,5 @@ tile(Monitor *m)
 		} else {
 			resize(c, sx, sy, sw - (2*c->bw), sh * (c->cfact / sfacts) + ((i - m->nmaster) < srest ? 1 : 0) - (2*c->bw), 0);
 			sy += HEIGHT(c) + ih;
-		}
-}
-static void
-tilewide(Monitor *m)
-{
-        unsigned int i, n, w, h, mw, mx, ty;
-	Client *c;
-
-	for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
-	if (n == 0)
-		return;
-
-	if (n > m->nmaster)
-		mw = m->nmaster ? m->ww * m->mfact : 0;
-	else
-		mw = m->ww;
-	for (i = mx = ty = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
-		if (i < m->nmaster) {
-		        w = (mw - mx) / (MIN(n, m->nmaster) - i);
-		        resize(c, m->wx + mx, m->wy, w - (2*c->bw), (m->wh - ty) - (2*c->bw), 0);
-		        if  (mx + WIDTH(c) < m->ww)
-		                mx += WIDTH(c);
-		} else {
-			h = (m->wh - ty) / (n - i);
-			resize(c, m->wx + mw, m->wy + ty, m->ww - mw - (2*c->bw), h - (2*c->bw), 0);
-			if (ty + HEIGHT(c) < m->wh)
-				ty += HEIGHT(c);
 		}
 }
