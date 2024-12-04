@@ -73,6 +73,7 @@ static void zoom(const Arg *);
 static void zoomabs(const Arg *);
 static void zoomreset(const Arg *);
 static void ttysend(const Arg *);
+static void chgalpha(const Arg *);
 
 /* config.h for applying patches and the configuration. */
 #include "config.h"
@@ -259,6 +260,7 @@ static char *usedfont = NULL;
 static double usedfontsize = 0;
 static double defaultfontsize = 0;
 
+static char *opt_alpha = NULL;
 static char *opt_class = NULL;
 static char **opt_cmd  = NULL;
 static char *opt_embed = NULL;
@@ -838,7 +840,9 @@ xloadcols(void)
 			else
 				die("could not allocate color %d\n", i);
 		}
-
+  /* set alpha value of bg color */
+  if (opt_alpha)
+    alpha = strtof(opt_alpha, NULL);
 	dc.col[defaultbg].color.alpha = (unsigned short)(0xffff * alpha);
 	dc.col[defaultbg].pixel &= 0x00FFFFFF;
 	dc.col[defaultbg].pixel |= (unsigned char)(0xff * alpha) << 24;
@@ -1172,7 +1176,9 @@ xinit(int cols, int rows)
 	XColor xmousefg, xmousebg;
 	XWindowAttributes attr;
 	XVisualInfo vis;
-
+  
+  if (!(xw.dpy = XOpenDisplay(NULL)))
+      die("can't open display\n");
 	xw.scr = XDefaultScreen(xw.dpy);
 
 	if (!(opt_embed && (parent = strtol(opt_embed, NULL, 0)))) {
@@ -1226,10 +1232,6 @@ xinit(int cols, int rows)
 
 	memset(&gcvalues, 0, sizeof(gcvalues));
 	gcvalues.graphics_exposures = False;
-//	dc.gc = XCreateGC(xw.dpy, xw.win, GCGraphicsExposures,
-//			&gcvalues);
-//	xw.buf = XCreatePixmap(xw.dpy, xw.win, win.w, win.h,
-//			DefaultDepth(xw.dpy, xw.scr));
 	xw.buf = XCreatePixmap(xw.dpy, xw.win, win.w, win.h, xw.depth);
 	dc.gc = XCreateGC(xw.dpy, xw.buf, GCGraphicsExposures, &gcvalues);
 			XSetForeground(xw.dpy, dc.gc, dc.col[defaultbg].pixel);
@@ -1420,6 +1422,24 @@ xmakeglyphfontspecs(XftGlyphFontSpec *specs, const Glyph *glyphs, int len, int x
 	}
 
 	return numspecs;
+}
+
+void
+chgalpha(const Arg *arg)
+{
+   if (arg->f == -1.0f && alpha >= 0.1f)
+      alpha -= 0.1f;
+   else if (arg->f == 1.0f && alpha < 1.0f)
+      alpha += 0.1f;
+   else if (arg->f == 0.0f)
+      alpha = alpha_def;
+   else
+      return;
+
+   dc.col[defaultbg].color.alpha = (unsigned short)(0xFFFF * alpha);
+   /* Required to remove artifacting from borderpx */
+   cresize(0, 0);
+   redraw();
 }
 
 void

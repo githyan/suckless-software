@@ -95,6 +95,7 @@ unsigned int tabspaces = 8;
 
 /* bg opacity */
 float alpha = 0.85; 
+float alpha_def;
 
 /* Terminal colors (16 first used in escape sequence) */
 #include "/home/archaen/.cache/wal/colors-wal-st.h"
@@ -206,6 +207,9 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
+  { MODKEY,               XK_a,           chgalpha,       {.f = -1} },
+  { MODKEY,               XK_b,           chgalpha,       {.f = +1} },
+  { MODKEY|ShiftMask,     XK_b,           chgalpha,       {.f =  0} },
   { ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
   { ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
 	{ ACMPL_MOD,            XK_slash,       autocomplete,   { .i = ACMPL_WORD        } },

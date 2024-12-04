@@ -133,6 +133,7 @@ extern unsigned int tabspaces;
 extern unsigned int defaultfg;
 extern unsigned int defaultbg;
 extern unsigned int defaultcs;
+extern float alpha, alpha_def;
 extern char *urlhandler;
 extern char urlchars[];
 extern char *urlprefixes[];
