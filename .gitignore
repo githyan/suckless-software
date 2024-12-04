@@ -1,6 +1,0 @@
-dwms/*.o
-dwms/dwm
-st/*.o
-st/st
-dmenu/*.o
-dmenu/dmenu
