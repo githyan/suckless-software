@@ -10,14 +10,16 @@ static const unsigned int gappov    = 10;       /* vert outer gap between window
 static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
+static const int horizpadbar        = 2;
+static const int vertpadbar         = 0;
 static const int vertpad            = 10;
 static const int sidepad            = 10;
-static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
+static const unsigned int systraypinning = 1;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray             = 1;   /* 0 means no systray */
-static const char *fonts[]          = { "monospace:size=10" };
-static const char dmenufont[]       = "monospace:size=10";
+static const char *fonts[]          = { "monospace:size=11" };
+static const char dmenufont[]       = "monospace:size=11";
 
 /* autostart */
 static const char broken[] = "broken";
@@ -183,9 +185,20 @@ static const Key keys[] = {
 	{ MODKEY|Mod1Mask|ShiftMask,    XK_0,      defaultgaps,    {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]}  },
+	{ MODKEY|ShiftMask,             XK_t,      setlayout,      {.v = &layouts[1]}  },
+  { MODKEY|ShiftMask|ControlMask, XK_t,      setlayout,      {.v = &layouts[2]}  },
+	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[3]}  },
+  { MODKEY|ShiftMask,             XK_m,      setlayout,      {.v = &layouts[4]}  },
+  { MODKEY|ShiftMask|ControlMask, XK_m,      setlayout,      {.v = &layouts[5]}  },
+  { MODKEY,                       XK_n,      setlayout,      {.v = &layouts[6]}  },
+  { MODKEY|ShiftMask,             XK_n,      setlayout,      {.v = &layouts[7]}  },
+  { MODKEY|ShiftMask|ControlMask, XK_n,      setlayout,      {.v = &layouts[8]}  },
+  { MODKEY,                       XK_f,      setlayout,      {.v = &layouts[9]}  },
+  { MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[10]} },
+  { MODKEY|ShiftMask|ControlMask, XK_f,      setlayout,      {.v = &layouts[11]} },
+  { MODKEY,                       XK_g,      setlayout,      {.v = &layouts[12]} },
+  { MODKEY|ShiftMask,             XK_g,      setlayout,      {.v = &layouts[13]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
