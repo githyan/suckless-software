@@ -18,8 +18,8 @@ static const unsigned int systraypinning = 1;   /* 0: sloppy systray follows sel
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray             = 1;   /* 0 means no systray */
-static const char *fonts[]          = { "monospace:size=11" };
-static const char dmenufont[]       = "monospace:size=11";
+static const char *fonts[]          = { "monospace:size=10" };
+static const char dmenufont[]       = "monospace:size=10";
 
 /* autostart */
 static const char broken[] = "broken";
@@ -89,7 +89,7 @@ static const unsigned int alphas[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = {"一", "二", "三","四","五","六","七","八","九"};
+static const char *tags[] = {"꧑", "꧒", "꧓","꧔","꧕","꧖","꧗","꧘","꧙"};
 static const unsigned int ulinepad	= 5;	/* horizontal padding between the underline and tag */
 static const unsigned int ulinestroke	= 2;	/* thickness / height of the underline */
 static const unsigned int ulinevoffset	= 0;	/* how far above the bottom of the bar the line should appear */
@@ -112,6 +112,7 @@ static const int resizehints = 1;    /* 1 means respect size hints in tiled resi
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
 #define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
+#define BAR_PADDING_PATCH 1
 #include "vanitygaps.c"
 #include <X11/XF86keysym.h>
 static const Layout layouts[] = {
@@ -151,7 +152,10 @@ static const char *termcmd[]  = { "st", NULL };
 static const char *incvol[] = {"/usr/bin/amixer", "set", "Master", "5%+", NULL};
 static const char *decvol[] = {"/usr/bin/amixer", "set", "Master", "5%-", NULL};
 static const char *mutevol[]    = { "/usr/bin/amixer", "set", "Master", "toggle", NULL };
+static const char *scrot[] = {"scrot", "/home/archaen/screenshot/Pictures/%Y-%m-%d-%T.png", NULL};
+static const char *scrot_select[] = {"scrot", "-s", "/home/archaen/screenshot/Pictures/%Y-%m-%d-%T.png", NULL};
 
+#include "movestack.c"
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
@@ -159,6 +163,8 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
+  { MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
+  { MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
@@ -221,7 +227,9 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask|ShiftMask, XK_q,      quit,           {1} },
   {0,                   XF86XK_AudioLowerVolume, spawn,     {.v = decvol  } },
   {0,                   XF86XK_AudioRaiseVolume, spawn,     {.v = incvol  } },
-  { 0,                  XF86XK_AudioMute,        spawn,     {.v = mutevol } },
+  {0,                   XF86XK_AudioMute,        spawn,     {.v = mutevol } },
+  {0,                   XK_Print,                spawn,     {.v = scrot } },
+  {ShiftMask,            XK_Print,                spawn,     {.v = scrot_select} },
 };
 
 /* button definitions */
