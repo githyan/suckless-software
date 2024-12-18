@@ -2,7 +2,7 @@
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int snap      = 32;       /* snap pixel */
+static const unsigned int snap      = 20;       /* snap pixel */
 static const unsigned int gappih    = 10;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 10;       /* vert inner gap between windows */
 static const unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
@@ -90,7 +90,7 @@ static const unsigned int alphas[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = {"꧑", "꧒", "꧓","꧔","꧕","꧖","꧗","꧘","꧙"};
+static const char *tags[] = {"一", " 二", "三","四","五","六","七","八"," 九"};
 static const unsigned int ulinepad	= 5;	/* horizontal padding between the underline and tag */
 static const unsigned int ulinestroke	= 2;	/* thickness / height of the underline */
 static const unsigned int ulinevoffset	= 0;	/* how far above the bottom of the bar the line should appear */
@@ -102,8 +102,10 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Gimp",     NULL,       NULL,       0,            1,            -1 },
+  { "Firefox", 	NULL, 	    NULL,           1 << 1,     False,      -1 },
+  { "firefox", 	NULL, 	    NULL,           1 << 1,     False,      -1 },
+  { "Steam",		"Steam",    "Steam",        1 << 6,     False,      -1 },
 };
 
 /* layout(s) */
@@ -150,6 +152,13 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-c", "-l", "15", "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, NULL };
 static const char *termcmd[]  = { "st", NULL };
+
+static const char scratchpadname[] = "scratchpad";
+static const char *scratchpadcmd[] = {
+  "st", "-t", scratchpadname, "-g", "120x34", NULL
+};
+
+
 static const char *incvol[] = {"/usr/bin/amixer", "set", "Master", "5%+", NULL};
 static const char *decvol[] = {"/usr/bin/amixer", "set", "Master", "5%-", NULL};
 static const char *mutevol[]    = { "/usr/bin/amixer", "set", "Master", "toggle", NULL };
@@ -161,6 +170,7 @@ static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+  { MODKEY,                       XK_grave,  togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
