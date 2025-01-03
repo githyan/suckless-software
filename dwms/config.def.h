@@ -103,7 +103,7 @@ static const Rule rules[] = {
     /* class      instance    title       tags mask     isfloating   monitor */
     {"Gimp", NULL, NULL, 0, 1, -1},
     {"Firefox", NULL, NULL, 1 << 1, False, -1},
-    {"firefox", NULL, NULL, 1 << 1, False, -1},
+    {"discord", NULL, NULL, 1 << 8, False, -1},
     {"zen-beta", "Navigator", NULL, 1 << 1, False, -1},
     {"dwm", NULL, NULL, 0, False, -1},
     {"steam", "steamwebhelper", "Steam", 1 << 8, 1, -1},
