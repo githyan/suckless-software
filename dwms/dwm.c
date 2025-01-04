@@ -1024,6 +1024,7 @@ void drawbar(Monitor *m) {
   /* draw status first so it can be overdrawn by tags later */
   if (m == selmon || 1) { /* status is only drawn on selected monitor */
     tw = m->ww - drawstatusbar(m, bh, stext);
+    // drw_text(drw, m->ww - tw, 0, tw, bh, lrpad / 2, stext, 0);
   }
 
   resizebarwin(m);
@@ -2149,8 +2150,9 @@ void setup(void) {
   drw = drw_create(dpy, screen, root, sw, sh);
   if (!drw_fontset_create(drw, fonts, LENGTH(fonts)))
     die("no fonts could be loaded.");
-  lrpad = drw->fonts->h;
-  bh = drw->fonts->h + user_bh;
+
+  lrpad = drw->fonts->h + horizpadbar;
+  bh = drw->fonts->h + vertpadbar;
   sp = sidepad;
   vp = (topbar == 1) ? vertpad : -vertpad;
   updategeom();
