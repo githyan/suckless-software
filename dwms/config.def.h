@@ -30,9 +30,9 @@ static const int systraypinningfailfirst =
           display systray on the last monitor*/
 static const int showsystray = 1; /* 0 means no systray */
 static const int vertpad = 5;     /* vertical padding of bar */
-static const int sidepad = 40;    /* horizontal padding of bar */
+static const int sidepad = 60;    /* horizontal padding of bar */
 static const int showbar = 1;     /* 0 means no bar */
-static const int topbar = 0;      /* 0 means bottom bar */
+static const int topbar = 1;      /* 0 means bottom bar */
 static const int horizpadbar = 2; /* horizontal padding for statusbar */
 static const int vertpadbar = 2;  /* vertical padding for statusbar */
 static const char *fonts[] = {
@@ -76,16 +76,13 @@ static char *colors[][3] = {
     [SchemeSel] = {selfgcolor, selbgcolor, selbordercolor},
 };
 /* tagging */
-static const char *tags[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
-static const char *tagsalt[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
-
-/*static const char *tags[] = {"一", " 二", "三", "四", "五",*/
-/*                             "六", "七",  "八", " 九"};*/
-/*static const char *tagsalt[] = {"一", " 二", "三", "四", "五",*/
-/*                                "六", "七",  "八", " 九"};*/
+static const char *tags[] = {"", "", "", "", "",
+                             "", "", "", ""};
+static const char *tagsalt[] = {"", "", "", "", "",
+                                "", "", "", ""};
 
 static const int momentaryalttags =
-    0; /* 1 means alttags will show only when key is held down*/
+    1; /* 1 means alttags will show only when key is held down*/
 
 static const unsigned int ulinepad =
     2; /* horizontal padding between the underline and tag */
@@ -108,6 +105,7 @@ static const Rule rules[] = {
     {"dwm", NULL, NULL, 0, False, -1},
     {"steam", "steamwebhelper", "Steam", 1 << 8, 1, -1},
     {"kitty", "kitty", NULL, 0, 0, -1},
+    {"Spotify", NULL, NULL, 1 << 2, False, -1},
 };
 
 static const char *incvol[] = {"/usr/bin/amixer", "set", "Master", "5%+", NULL};
@@ -219,9 +217,12 @@ static const Key keys[] = {
     {MODKEY, XK_n, setlayout, {.v = &layouts[6]}},
     {MODKEY | ShiftMask, XK_n, setlayout, {.v = &layouts[7]}},
     {MODKEY | ShiftMask | ControlMask, XK_n, setlayout, {.v = &layouts[8]}},
-    {MODKEY, XK_f, setlayout, {.v = &layouts[9]}},
-    {MODKEY | ShiftMask, XK_f, setlayout, {.v = &layouts[10]}},
+
+    {MODKEY, XK_f, togglefullscr, {0}},
+    {MODKEY | ShiftMask, XK_f, setlayout, {.v = &layouts[9]}},
+    {MODKEY | Mod1Mask | ShiftMask, XK_f, setlayout, {.v = &layouts[10]}},
     {MODKEY | ShiftMask | ControlMask, XK_f, setlayout, {.v = &layouts[11]}},
+
     {MODKEY, XK_g, setlayout, {.v = &layouts[12]}},
     {MODKEY | ShiftMask, XK_g, setlayout, {.v = &layouts[13]}},
     {MODKEY, XK_space, setlayout, {0}},
